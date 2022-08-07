@@ -79,7 +79,7 @@ function List() {
         <ol>
         {tasklist.map(item => (
         <div>
-            <li className="flex justify-around" key = {item.id}>
+            <li className="flex justify-around text-lg py-2" key = {item.id}>
             {item.name} 
             </li>
             <ul>
