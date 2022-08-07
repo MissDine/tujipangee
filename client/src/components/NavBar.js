@@ -20,7 +20,7 @@ function NavBar({ user, setUser }) {
           <Link className="mr-5 text-lg" to='/login'>Log In</Link>
           <Link className="mr-5 text-lg" to='/signup'>Sign Up</Link>
           <Link className='mr-5 text-lg' to="/home">Home</Link>
-          <Link className='mr-5 text-lg' to="/list">List</Link>
+          <Link className='mr-5 text-lg' to="/lists">List</Link>
         </div>
       </div>
         {/* <button variant="outline" onClick={handleLogoutClick}>

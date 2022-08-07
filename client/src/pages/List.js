@@ -57,40 +57,41 @@ function List() {
     
     return(
         <>
-            <div>
-            <h1 className="lii">List of all tasks:</h1>
-            <form onSubmit = {handleSubmit}>
-                <input
-                type="text"
-                name="text"
-                id="text"
-                value = {task.name}
-                onChange={(e) => setTask({
-                    ...task,
-                    name: e.target.value
-                })}
-                placeholder="Edit task in the list..."
-                />
+        <div>
+        <h1 className="text-black text-center py-10">List of all tasks:</h1>
+        <form onSubmit = {handleSubmit} className='flex pb-10 justify-center items-center'>
+            <input
+            type="text"
+            name="text"
+            id="text"
+            className="mr-4 appearance-none rounded-none relative block px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            value = {task.name}
+            onChange={(e) => setTask({
+                ...task,
+                name: e.target.value
+            })}
+            placeholder="Edit task in the list..."
+            />
 
-                <input className = "sub"
-                type="submit" value="Edit list.." />
-            </form>
-            <ol>
-            {tasklist.map(item => (
-            <div>
-                <li className="list" key = {item.id}>
-                {item.name} 
-                </li>
-                <ul>
-                    {item.tasks.map(task=>(<li className="taskl" key = {task.id}>{task.name}
-                    <button className="edit"
-                onClick = {()=>handleEdit(task.id, task.name,item.id)} >Edit</button> <button className="dele"
-                onClick={()=>handleDelete(task.id)}>Delete</button></li>))}
-                </ul>
-            </div>
-            ))}
+            <input className = "sub"
+            type="submit" value="Edit list.." />
+        </form>
+        <ol>
+        {tasklist.map(item => (
+        <div>
+            <li className="flex justify-around" key = {item.id}>
+            {item.name} 
+            </li>
+            <ul>
+                {item.tasks.map(task=>(<li className="taskl" key = {task.id}>{task.name}
+                <button className="text-black bg-green-600 rounded py-2 px-4 ml-8 my-5"
+            onClick = {()=>handleEdit(task.id, task.name,item.id)} >Edit</button> <button className="text-black bg-red-600 rounded py-2 px-4 ml-8 my-5"
+            onClick={()=>handleDelete(task.id)}>Delete</button></li>))}
+            </ul>
+        </div>
+        ))}
 
-            </ol>
+        </ol>
         </div>
         </>
         
