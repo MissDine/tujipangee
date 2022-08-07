@@ -80,41 +80,43 @@ console.log("eeeeeee",list);
   return (
    <>
 
-      <div className="todo">
-      <div className="App">
-      <span className="title">My To Do List</span> <br />
-    </div>
-    <form action="" onSubmit={AddTask}>
-    <input
-        type="text"
-        name="text"
-        id="text"
-        onChange={(e) => handleChange(e)}
-        placeholder="Add task here..."
-        value={task}
-      />
-      <select className = "sele" onChange={(e) => handleListChange(e)}>
-        {list ? list.map(item=> (<option className="opti" key = {item.id} value = {item.id}>{item.name}</option>)) : null}
-      </select>
-      <button className="add-btn">
-        Add
-      </button>
-    </form>
+    <div className="flex flex-col justify-items-center">
+      <div className="text-center py-10">
+        <span className="text-black text-xl font-bold">My To Do List</span> <br />
+      </div>
+      <form action="" onSubmit={AddTask} className='flex flex-col justify-center items-center' >
+        <input
+            type="text"
+            name="text"
+            id="text"
+            className="mb-4 appearance-none rounded-none relative block px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            onChange={(e) => handleChange(e)}
+            placeholder="Add task here..."
+            value={task}
+          />
+          <select onChange={(e) => handleListChange(e)} className='w-64 h-8'>
+            <option>Choose category</option>
+            {list ? list.map(item=> (<option className="color-black" key = {item.id} value = {item.id}>{item.name}</option>)) : null}
+          </select>
+        <button className='bg-orange-600 py-2 px-3 rounded mb-6 hover:bg-orange-800 w-32 mt-10'>
+          Add
+        </button>
+      </form>
      
       <br />
       {tasklist !== [] ? (
-        <ul>
+        <ul className="flex justify-around">
           {tasklist.map((t) => (
-            <li id={t.id} className={t.isCompleted ? "crossText" : "listitem"}>
+            <li id={t.id} style={{color: "black", fontSize: "20px"}} className={t.isCompleted ? "line-through" : "listitem"}>
               {t.value}
               <button
-                className="completed"
+                className="text-black bg-green-600 rounded py-2 px-4 ml-8 my-5"
                 onClick={(e) => taskCompleted(e, t.id)}
               >
                 Completed
               </button>
 
-              <button className="delete" onClick={(e) => deletetask(e, t.id)}>
+              <button className="bg-red-600 rounded py-2 px-4 ml-8 my-5" onClick={(e) => deletetask(e, t.id)}>
                 Delete
               </button>
             </li>
