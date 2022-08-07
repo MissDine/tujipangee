@@ -101,8 +101,11 @@ return (
         
           <button className='bg-orange-600 py-2 px-3 rounded mb-6 hover:bg-orange-800' placeholder="submit" type="submit">
           <Link to="/"><h2 className="text-white text-decoration-none">Sign Up</h2></Link>
+          
           </button>
-      
+          <h2 className="pb-10">
+            Already have an account? <Link to="/login" className='text-orange-600 hover:text-orange-800'>Login</Link>
+          </h2>
         </form>
       </div>
     );
