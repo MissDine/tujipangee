@@ -78,7 +78,7 @@ function List() {
             type="submit" value="Edit list.." />
         </form>
         <ol>
-        {tasklist.map(item => (
+        {tasklist !== [] ? tasklist.map(item => (
         <div key={item.id} className='pb-6'>
             <li className="flex justify-around text-lg py-2" key = {item.id}>
             <p className="text-xl font-bold">{item.name}</p> 
@@ -92,7 +92,7 @@ function List() {
                 onClick={()=>handleDelete(task.id)}>Delete</button></li>)) : "No data"}
             </ul>
         </div>
-        ))}
+        )) : <div>Task list is empty</div>}
 
         </ol>
         </div>

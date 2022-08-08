@@ -115,7 +115,7 @@ console.log("eeeeeee",tasklist);
             </div>
           ))}
         </div>
-      ) : null}
+      ) : <div>Task list is empty</div>}
     </div>
     
    </>
