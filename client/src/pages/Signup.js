@@ -79,7 +79,7 @@ function Signup({onLogin}) {
           </button>
 
           {errors.map((err) => (
-            <p key={err}>{err}</p>
+            <p className='text-red-500 py-1' key={err}>{err}</p>
           ))}
         </form>
       </div>

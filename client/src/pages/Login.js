@@ -65,7 +65,7 @@ function Login({onLogin}) {
             </button>
 
           {errors.map((err) => (
-            <p key={err}>{err}</p>
+            <p key={err} className='text-red-600 py-2'>{err}</p>
           ))}
         </form>
         <div className="pb-6">
@@ -74,7 +74,7 @@ function Login({onLogin}) {
     </div>
       ) : ( <>
       <Signup onLogin={onLogin}/>
-      <h2 className="pb-10">
+      <h2 className="pb-10 mt-4">
         Already have an account? <Link to="/login" className='text-orange-600 hover:text-orange-800'  onClick={() => setShowLogin(true)}>Login</Link>
       </h2>
       </>
