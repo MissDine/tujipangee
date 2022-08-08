@@ -18,7 +18,7 @@ function App () {
         navigate('/home')
       }
     })
-  }, [])
+  }, [navigate])
   if(!user) return <Login onLogin={setUser} />
     return (
       <div className='app'>

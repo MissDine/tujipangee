@@ -61,7 +61,7 @@ function Login({onLogin}) {
             />
           
             <button className='bg-orange-600 py-2 px-3 rounded mb-6 hover:bg-orange-800' placeholder="submit" type="submit">
-              Login
+              {isLoading ? "Logging in..." : "Login"}
             </button>
 
           {errors.map((err) => (
