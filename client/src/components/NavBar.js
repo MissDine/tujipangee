@@ -16,16 +16,18 @@ function NavBar({ user, setUser }) {
         <div className="">
           <h1 className="text-black">Tu Jipange</h1>
         </div> 
-        <div className="flex ">
+        {!user ? (<div className="flex ">
           <Link className="mr-5 text-lg" to='/login'>Log In</Link>
           <Link className="mr-5 text-lg" to='/signup'>Sign Up</Link>
+        </div>) :
+        (<div>
           <Link className='mr-5 text-lg' to="/home">Home</Link>
           <Link className='mr-5 text-lg' to="/lists">List</Link>
-        </div>
+          <button variant="outline" onClick={handleLogoutClick}>
+            Logout
+          </button>
+        </div>)}
       </div>
-        {/* <button variant="outline" onClick={handleLogoutClick}>
-          Logout
-        </button> */}
     </div>
   );
 }

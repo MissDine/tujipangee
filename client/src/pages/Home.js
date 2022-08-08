@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../components/Home.css";
 
 
-function Home() {
+function Home({user}) {
   const [list, setList] = useState()
   const [task, setTask] = useState("");
   const [tasklist, setTaskList] = useState([]);
@@ -19,18 +19,6 @@ function Home() {
  
   const AddTask = (e) => {
     e.preventDefault()
-    setTask()
-    if (task !== "") {
-      const taskDetails = {
-        id: Math.floor(Math.random() * 1000),
-        value: task,
-        isCompleted: false,
-      };
-
-      setTaskList([...tasklist, taskDetails]);
-    }
-
-    console.log("task: ", task, "id: ", id)
     fetch("/tasks",{
       method: "POST",
       // mode: "no-cors",
@@ -39,8 +27,8 @@ function Home() {
       },
       body: JSON.stringify({
         name: task,
-        user_id: 1,
-        list_id: id
+        list_id: Number(id),
+        user_id: user.id
       })
     })
     .then(response=> response.json())
@@ -69,12 +57,15 @@ function Home() {
 
     setTaskList(newTaskList);
   };
+
   useEffect(()=>{
-    fetch("/lists").then(response =>response.json()).then(data=>setList(data))
-},[])
+    fetch("/lists").then(response =>response.json()).then(data=>{
+      setList(data)
+      setTaskList(data[0].tasks)
+    })
+  },[])
 
-console.log("eeeeeee",list);
-
+console.log("eeeeeee",tasklist);
 
 
   return (
@@ -105,23 +96,25 @@ console.log("eeeeeee",list);
     
       <br />
       {tasklist !== [] ? (
-        <ul className="flex justify-around">
+        <div className="py-4">
           {tasklist.map((t) => (
-            <li id={t.id} style={{color: "black", fontSize: "20px"}} className={t.isCompleted ? "line-through" : "listitem"}>
-              {t.value}
-              <button
-                className="text-black bg-green-600 rounded py-2 px-4 ml-8 my-5"
-                onClick={(e) => taskCompleted(e, t.id)}
-              >
-                Completed
-              </button>
+            <div key={t.id} style={{color: "black", fontSize: "15px", display: "flex", justifyContent: "space-around"}} className={t.isCompleted ? "line-through" : "listitem"}>
+              <p className="py-2 px-4 ml-8 my-3">{t.name}</p>
+              <div>
+                <button
+                  className="text-black bg-green-600 rounded py-2 px-4 ml-8 my-3"
+                  onClick={(e) => taskCompleted(e, t.id)}
+                >
+                  Completed
+                </button>
 
-              <button className="bg-red-600 rounded py-2 px-4 ml-8 my-5" onClick={(e) => deletetask(e, t.id)}>
-                Delete
-              </button>
-            </li>
+                <button className="bg-red-600 rounded py-2 px-4 ml-8 my-3" onClick={(e) => deletetask(e, t.id)}>
+                  Delete
+                </button>
+              </div>
+            </div>
           ))}
-        </ul>
+        </div>
       ) : null}
     </div>
     

@@ -10,11 +10,12 @@ function List() {
         list_id:null
     });
     const [tasklist, setTaskList] = useState([]);
-    useEffect(() => {
+    const fetchData = () => {
         fetch("/lists").then(response => response.json()).then(data =>setTaskList(data))
-
-    },[])
-    console.log("enid", tasklist)
+    }
+    if(tasklist.length === 0) {
+        fetchData()
+    }
     function handleEdit(id, name,list_id){
         setTask({
             ...task,
@@ -22,7 +23,7 @@ function List() {
             name:name,
             list_id:list_id
         }) 
-        
+        fetchData() 
     }
 
     function handleDelete(id){
@@ -78,15 +79,17 @@ function List() {
         </form>
         <ol>
         {tasklist.map(item => (
-        <div>
+        <div key={item.id} className='pb-6'>
             <li className="flex justify-around text-lg py-2" key = {item.id}>
-            {item.name} 
+            <p className="text-xl font-bold">{item.name}</p> 
             </li>
             <ul>
-                {item.tasks.map(task=>(<li className="taskl" key = {task.id}>{task.name}
-                <button className="text-black bg-green-600 rounded py-2 px-4 ml-8 my-5"
-            onClick = {()=>handleEdit(task.id, task.name,item.id)} >Edit</button> <button className="text-black bg-red-600 rounded py-2 px-4 ml-8 my-5"
-            onClick={()=>handleDelete(task.id)}>Delete</button></li>))}
+                {item.tasks.length !== 0 ? item.tasks.map((task) => (
+                <li className="text-black my-4 flex justify-center" key = {task.id}>{task.name}
+                <button className=" bg-green-600 rounded py-2 px-4 ml-8"
+                onClick = {()=>handleEdit(task.id, task.name,item.id)} >Edit</button> 
+                <button className="bg-red-600 rounded py-2 px-4 ml-8"
+                onClick={()=>handleDelete(task.id)}>Delete</button></li>)) : "No data"}
             </ul>
         </div>
         ))}
