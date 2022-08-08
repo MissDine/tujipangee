@@ -52,7 +52,7 @@ function Home({user}) {
     //edit our element
     newTaskList[element] = {
       ...newTaskList[element],
-      isCompleted: true,
+      isCompleted: true
     };
 
     setTaskList(newTaskList);

@@ -35,7 +35,6 @@ function List() {
     }
     function handleSubmit(e){
         e.preventDefault()
-        console.log(task);
         fetch(`/tasks/${task.user_id}`,{
             method: "PATCH",
             headers:{
